@@ -8,7 +8,6 @@
 #include <Blume_Gemalt_80_100_127_240.h>
 
 
-
 TFT_eSPI tft = TFT_eSPI();
 TFT_eSprite Waterpercenticon = TFT_eSprite(&tft);
 TFT_eSprite WaterpercentNummber = TFT_eSprite(&tft);
@@ -29,6 +28,7 @@ void setup() {
     Serial.println("Aufgewacht durch den Knopf");
   } else {
     Serial.println("Normaler Neustart");
+    Serial.print("hallo");
   }
 delay(2000); 
   
