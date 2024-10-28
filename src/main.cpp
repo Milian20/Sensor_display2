@@ -78,9 +78,11 @@ void loop() {
     delay(2000);  
 
     // deepsleep wacke up per putton
-    esp_sleep_enable_ext0_wakeup((gpio_num_t)BUTTON_PIN, LOW);  
+    esp_sleep_enable_ext0_wakeup((gpio_num_t)BUTTON_PIN, LOW);
+    // 
+    uint64_t timer_wakeup_deepsleep = static_cast<uint64_t>(timer_deep_sleep_in_hours) * 1000000;  
     // deepsleep wacke up after timmer after button press
-    esp_sleep_enable_timer_wakeup(timer_deep_sleep_in_hours*1000000); // 1000000 micro seconds for 1 second 
+    esp_sleep_enable_timer_wakeup(timer_wakeup_deepsleep); // 1000000 micro seconds for 1 second 
 
     // Go to deepsleep
     esp_deep_sleep_start();
@@ -122,6 +124,7 @@ void loop() {
         Blume.setSwapBytes(true);
         Blume.pushImage(0, 0, 127, 240, Blume_Gemalt_0_20_127_240);
         Blume.pushSprite(0, 0, TFT_WHITE);
+        tft.fillScreen(TFT_RED);
         break;
     }
     //20-40%
@@ -130,6 +133,7 @@ void loop() {
         Blume.setSwapBytes(true);
         Blume.pushImage(0, 0, 127, 240, Blume_Gemalt_20_40_127_240);
         Blume.pushSprite(0, 0, TFT_WHITE);
+        tft.fillScreen(TFT_DARKGREY);
         break;
     }
     //40-60%
@@ -138,6 +142,7 @@ void loop() {
         Blume.setSwapBytes(true);
         Blume.pushImage(0, 0, 127, 240, Blume_Gemalt_40_60_127_240);
         Blume.pushSprite(0, 0, TFT_WHITE);
+        tft.fillScreen(TFT_DARKGREY);
         break;
     }
     //60-80%
@@ -146,6 +151,7 @@ void loop() {
         Blume.setSwapBytes(true);
         Blume.pushImage(0, 0, 127, 240, Blume_Gemalt_60_80_127_240);
         Blume.pushSprite(0, 0, TFT_WHITE);
+        tft.fillScreen(TFT_DARKGREY);
         break;
     }
     //80-100%
@@ -154,6 +160,7 @@ void loop() {
         Blume.setSwapBytes(true);
         Blume.pushImage(0, 0, 127, 240, Blume_Gemalt_80_100_127_240);
         Blume.pushSprite(0, 0, TFT_WHITE);
+        tft.fillScreen(TFT_DARKGREY);
         break;
     }
 
