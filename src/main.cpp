@@ -14,13 +14,15 @@ TFT_eSprite WaterpercentNummber = TFT_eSprite(&tft);
 TFT_eSprite Blume = TFT_eSprite(&tft);
 
 #define TFTDISPLAYPOWER 32 // PIN from ESP
-#define BUTTON_PIN 39   // PIN from ESP
+#define BUTTON_PIN 39   // PIN from ESP for deep slep and wacke up
+#define timer_deep_sleep_in_hours 4*3600 // hour * 3600 seconds for 1 hour
 
 void setup() {
  Serial.begin(115200);
  pinMode(BUTTON_PIN, INPUT_PULLUP);
  tft.writecommand(TFT_DISPON); 
  pinMode(TFTDISPLAYPOWER, OUTPUT);
+
 
 
   // Check for button press
@@ -75,8 +77,10 @@ void loop() {
     digitalWrite(TFTDISPLAYPOWER, LOW);
     delay(2000);  
 
-    // deepsleep wacke up
+    // deepsleep wacke up per putton
     esp_sleep_enable_ext0_wakeup((gpio_num_t)BUTTON_PIN, LOW);  
+    // deepsleep wacke up after timmer after button press
+    esp_sleep_enable_timer_wakeup(timer_deep_sleep_in_hours*1000000); // 1000000 micro seconds for 1 second 
 
     // Go to deepsleep
     esp_deep_sleep_start();
